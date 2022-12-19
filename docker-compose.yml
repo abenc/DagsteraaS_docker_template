@@ -53,6 +53,8 @@ services:
     image: docker_example_user_code_image
     expose:
       - "4000"
+    ports:
+      - "4000:4000"
     restart: always
     environment:
       DAGSTER_PG_USER: "postgres"

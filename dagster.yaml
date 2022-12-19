@@ -12,7 +12,7 @@ storage:
       port: 5432
 
 compute_logs:
-  module: dagster_gcp.gcs.GCSComputeLogManager
+  module: dagster_gcp.gcs.compute_log_manager
   class: GCSComputeLogManager
   config:
     bucket: "dagster-compute-logs"

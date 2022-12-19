@@ -51,6 +51,8 @@ services:
       dockerfile: ./Dockerfile_user_code
     container_name: docker_example_user_code
     image: docker_example_user_code_image
+    expose:
+      - "4000"
     restart: always
     environment:
       DAGSTER_PG_USER: "postgres"

@@ -43,12 +43,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/io_manager_storage:/tmp/io_manager_storage
     networks:
-      - docker_network      
-
-networks:
-  docker_network:
-    driver: bridge
-    name: docker_network
+      - docker_network
 
   docker_example_user_code:
     build:
@@ -65,3 +60,9 @@ networks:
       DAGSTER_CURRENT_IMAGE: "docker_example_user_code_image"
     networks:
       - docker_network
+
+networks:
+  docker_network:
+    driver: bridge
+    name: docker_network
+

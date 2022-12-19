@@ -64,4 +64,4 @@ networks:
       DAGSTER_PG_HOST: "10.32.240.3"
       DAGSTER_CURRENT_IMAGE: "docker_example_user_code_image"
     networks:
-      - docker_example_network
+      - docker_network

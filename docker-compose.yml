@@ -1,0 +1,53 @@
+services:
+  docker_dagit:
+    build: 
+      context: .
+      dockerfile: ./dagster_Dockerfile.dockerfile
+    entrypoint:
+      - dagit
+      - -h
+      - -"0.0.0.0"
+      - -p
+      - "3000"
+      - -w
+      - workspace.yaml
+    container_name: docker_dagit
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    environment:
+      DAGSTER_PG_USER: "postgres"
+      DAGSTER_PG_PASSWORD: "dagster"
+      DAGSTER_PG_DB: "dagster"
+      DAGSTER_PG_HOST: "35.205.119.146"
+    volumes: # Make docker client accessible so we can terminate containers from dagit
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/io_manager_storage:/tmp/io_manager_storage
+    networks:
+      - docker_network
+
+  docker_daemon:
+    build:
+      context: .
+      dockerfile: ./dagster_Dockerfile.dockerfile
+    entrypoint:
+      - dagster-daemon
+      - run
+    container_name: docker_daemon
+    restart: on-failure
+    environment:
+      DAGSTER_PG_USER: "postgres_user"
+      DAGSTER_PG_PASSWORD: "postgres_password"
+      DAGSTER_PG_DB: "postgres_db"
+      DAGSTER_PG_HOST: ""
+    volumes: # Make docker client accessible so we can launch containers using host docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/io_manager_storage:/tmp/io_manager_storage
+    networks:
+      - docker_network      
+
+networks:
+  docker_network:
+    driver: bridge
+    name: docker_network

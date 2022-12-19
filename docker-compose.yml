@@ -49,3 +49,19 @@ networks:
   docker_network:
     driver: bridge
     name: docker_network
+
+  docker_example_user_code:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_user_code
+    container_name: docker_example_user_code
+    image: docker_example_user_code_image
+    restart: always
+    environment:
+      DAGSTER_PG_USER: "postgres"
+      DAGSTER_PG_PASSWORD: "dagster"
+      DAGSTER_PG_DB: "dagster"
+      DAGSTER_PG_HOST: "10.32.240.3"
+      DAGSTER_CURRENT_IMAGE: "docker_example_user_code_image"
+    networks:
+      - docker_example_network

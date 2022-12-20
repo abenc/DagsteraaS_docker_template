@@ -13,7 +13,7 @@ RUN pip install \
 
 WORKDIR /opt/dagster/app
 
-COPY repo.py dagster.py /opt/dagster/app
+COPY repo.py dagster.yaml /opt/dagster/app
 
 # Run dagster gRPC server on port 4000
 

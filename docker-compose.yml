@@ -26,6 +26,8 @@ services:
       - /tmp/io_manager_storage:/tmp/io_manager_storage
     networks:
       - docker_network
+    depends_on:
+      - docker_example_user_code
 
   docker_daemon:
     build:
@@ -77,8 +79,6 @@ services:
       DAGSTER_CURRENT_IMAGE: "docker_example_user_code_image"
     networks:
       - docker_network
-    depends_on:
-      - docker_example_user_code
 
 networks:
   docker_network:

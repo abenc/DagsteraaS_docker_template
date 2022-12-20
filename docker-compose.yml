@@ -60,7 +60,7 @@ services:
       - -p
       - "4000"
       - -f
-      - repo.y
+      - repo.py
 
     container_name: docker_example_user_code
     image: docker_example_user_code_image
